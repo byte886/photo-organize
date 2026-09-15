@@ -81,7 +81,8 @@ awk -F'\t' '$2>=2 {print $1}' /tmp/face_result.txt > /tmp/group.txt     # 多人
 SKILL="$HOME/Doubao/skills/photo-organize"
 
 # 准备列表文件（显示名<TAB>完整路径）；示例：无人脸组补上完整路径
-awk -F'\t' '$2==0 {print $1"\t/path/to/photos/"$1}' /tmp/face_result.txt > /tmp/noface_list.txt
+# -v d 必须与第二步 face_detect 的输入目录一致（$1 只是文件名，不含目录）
+awk -F'\t' -v d="/path/to/candidate" '$2==0 {print $1"\t"d"/"$1}' /tmp/face_result.txt > /tmp/noface_list.txt
 
 # 分批（每批60张）
 split -l 60 /tmp/noface_list.txt /tmp/batch_
@@ -212,6 +213,6 @@ du -sh "$DST"
 3. **人脸检测是辅助**：侧脸/背影/远距离会漏检，无人脸组仍需联系表确认
 4. **文档截图排除**：家庭相册只放照片，文档/截图/证件应排除或单独归档
 5. **大目录分批**：>1000 张的目录，联系表每批 50-60 张，分多轮处理
-6. **保留来源信息**：暂存目录下按来源建子目录（如 `iphone_相处胶卷/`、`HMA-AL00_家人/`），便于追溯
+6. **保留来源信息**：暂存目录下按来源建子目录（如 `iphone_相机胶卷/`、`HMA-AL00_家人/`），便于追溯
 7. **uchg 标志**：macOS 下某些文件可能有不可变标志，mv 报 Operation not permitted 时用 `sudo chflags nouchg 文件` 解除
 8. **去重不直接删**：两级去重都先隔离到 `_重复待确认`，人工确认后再清，避免误删
