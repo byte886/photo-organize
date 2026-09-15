@@ -9,6 +9,8 @@
 ## 目录
 
 - `SKILL.md`：技能入口与路由
+- `scripts/contact_sheet.py`：联系表（缩略图网格）生成
+- `scripts/dedup_photos.py`：MD5 精确 + dHash 感知两级去重
 
 ## 许可
 
