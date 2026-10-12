@@ -1,4 +1,5 @@
 ---
+type: workflow
 name: photo-organize
 description: "家庭/个人照片批量整理与相册归档工作流：目录侦察、人脸检测预分组、联系表逐批核验、按人物/场景分类移动、MD5 精确+dHash 感知两级去重、整理后完整性校验。当用户要整理或归档海量照片备份（手机导出、微信备份、硬盘转存）、清理重复或连拍、把散乱照片归入结构化家庭相册、按人脸分组时使用。随附 contact_sheet.py 与 dedup_photos.py 脚本。"
 compatibility: "仅在 macOS(Darwin) 实测；执行前先 `uname -s` 判平台，非 macOS 停步告知不硬跑。依赖 Python3+Pillow、face-detect 技能、macOS 系统工具 find/du/md5/cp/mv。"
